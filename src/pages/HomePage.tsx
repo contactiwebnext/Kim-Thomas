@@ -71,31 +71,45 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <div className="space-y-0 text-[#FDFCF8] bg-[#121212]">
       {/* 1. HERO SECTION */}
-      <section className="relative pt-12 pb-20 md:pt-16 md:pb-28 bg-[#121212] overflow-hidden border-b border-[#FDFCF8]/10">
+      <section className="relative pt-16 pb-24 md:pt-24 md:pb-32 overflow-hidden border-b border-[#FDFCF8]/10">
+        {/* Background Portrait of Kim Nicole Thomas with Sophisticated Dark Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://dmuoodsvt4pkwwlq.public.blob.vercel-storage.com/Create_video_for_leadership_coach_202608312221.mp4" 
+            alt="Kim Nicole Thomas - Executive Leadership and Wellbeing Coach"
+            className="w-full h-full object-cover object-top sm:object-center filter brightness-[0.45] contrast-[1.15] scale-105"
+            referrerPolicy="no-referrer"
+          />
+          {/* Multi-tier gradient overlay to ensure maximum legibility and refined dark aesthetic */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#121212]/95 via-[#121212]/80 to-[#121212] mix-blend-multiply"></div>
+          <div className="absolute inset-0 bg-radial-at-center from-transparent via-[#0F0F0F]/65 to-[#0A0A0A]/95"></div>
+          <div className="absolute inset-0 bg-[#0F0F0F]/30 backdrop-blur-[1px]"></div>
+        </div>
+
         {/* Subtle decorative background ambient glow */}
-        <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-[#C5A059]/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-[#C5A059]/10 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#C5A059]/5 rounded-full blur-3xl -ml-24 -mb-24 pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto space-y-6 text-center">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm bg-[#C5A059]/10 border border-[#C5A059]/25 text-xs font-bold uppercase tracking-widest text-[#C5A059]">
+          <div className="max-w-4xl mx-auto space-y-7 text-center">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm bg-[#121212]/80 backdrop-blur-md border border-[#C5A059]/40 text-xs font-bold uppercase tracking-widest text-[#C5A059] shadow-lg">
               <Award className="w-3.5 h-3.5 text-[#C5A059]" />
               <span>Executive Leadership & Wellbeing Coach · Strategic Advisor · Keynote Speaker</span>
             </div>
 
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#FDFCF8] font-bold leading-[1.12] tracking-tight">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#FDFCF8] font-bold leading-[1.12] tracking-tight drop-shadow-md">
               Leading at the Top Shouldn't Cost Your <span className="italic font-normal text-[#C5A059]">Wellbeing</span>—or Your <span className="italic font-normal text-[#C5A059]">Edge</span>.
             </h1>
 
-            <p className="text-base sm:text-lg text-[#FDFCF8]/80 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-[#FDFCF8]/90 max-w-3xl mx-auto leading-relaxed drop-shadow-sm font-normal">
               Whether you're steering a boardroom, scaling the company you built from the ground up, shaping culture as a thought leader, or bringing bold creative vision to life—you carry the weight of high-stakes decisions, constant visibility, and the pressure to keep performing at your peak.
             </p>
 
-            <div className="p-5 rounded-md bg-[#181818] border border-[#C5A059]/30 text-xs sm:text-sm text-[#FDFCF8]/90 leading-relaxed max-w-3xl mx-auto text-left sm:text-center">
+            <div className="p-5 rounded-md bg-[#141414]/90 backdrop-blur-md border border-[#C5A059]/35 text-xs sm:text-sm text-[#FDFCF8]/95 leading-relaxed max-w-3xl mx-auto text-left sm:text-center shadow-2xl">
               <span className="font-bold text-[#C5A059]">The Partner You Need:</span> Having a dedicated, highly confidential partner who understands organizational systems, strategic execution, and human performance makes the difference between burning out and scaling your impact.
             </div>
 
-            <p className="text-xs sm:text-sm text-[#FDFCF8]/70 max-w-2xl mx-auto leading-relaxed italic">
+            <p className="text-xs sm:text-sm text-[#FDFCF8]/80 max-w-2xl mx-auto leading-relaxed italic">
               High-touch coaching, strategic sounding-board advisory, and communication support tailored for C-suite executives, emerging leaders, entrepreneurs, and visionary creatives navigating what's next.
             </p>
 
@@ -111,7 +125,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <button
                 onClick={() => onNavigate('speaking')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-sm bg-[#1E1E1E] text-[#FDFCF8] font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#2A2A2A] border border-[#FDFCF8]/15 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-sm bg-[#1E1E1E]/90 backdrop-blur-sm text-[#FDFCF8] font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#2A2A2A] border border-[#FDFCF8]/20 transition-all shadow-md"
               >
                 <span>Book Kim to Speak</span>
                 <Mic2 className="w-4 h-4 text-[#C5A059]" />
@@ -119,7 +133,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <button
                 onClick={onOpenReel}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-sm text-xs font-semibold text-[#FDFCF8]/70 hover:text-[#C5A059] transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-sm text-xs font-semibold text-[#FDFCF8]/80 hover:text-[#C5A059] transition-colors"
               >
                 <div className="w-7 h-7 rounded-full bg-[#1E1E1E] border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059]">
                   <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
@@ -129,7 +143,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
 
             {/* Credibility badges */}
-            <div className="pt-8 border-t border-[#FDFCF8]/10 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className="pt-8 border-t border-[#FDFCF8]/15 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
               {CORE_METRICS.map((metric, idx) => (
                 <div key={idx} className="space-y-1">
                   <div className="font-serif text-2xl sm:text-3xl font-bold text-[#C5A059]">
