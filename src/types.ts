@@ -6,6 +6,15 @@ export type NavigationPage =
   | 'speaking'
   | 'contact';
 
+export interface ExecutiveEngagementModel {
+  id: string;
+  model: string;
+  details: string;
+  focusAreas: string;
+  badge?: string;
+  iconName?: string;
+}
+
 export interface Testimonial {
   id: string;
   quote: string;

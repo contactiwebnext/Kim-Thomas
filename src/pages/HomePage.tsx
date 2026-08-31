@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NavigationPage } from '../types';
 import { 
   SITE_CONTACT, 
   CORE_METRICS, 
   CORE_AREAS_OF_SUPPORT,
+  EXECUTIVE_ENGAGEMENT_MODELS,
   SECTORS_DATA, 
   TESTIMONIALS, 
   KEYNOTE_TOPICS 
@@ -31,7 +32,12 @@ import {
   UserCheck,
   BatteryCharging,
   BookOpen,
-  HeartHandshake
+  HeartHandshake,
+  MapPin,
+  Linkedin,
+  Layers,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -48,6 +54,29 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenSpeakerKit
 }) => {
   const [activeTestimonialIdx, setActiveTestimonialIdx] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {
+        // Fallback for browsers requiring user gesture
+      });
+    }
+  }, []);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      const nextMuted = !isMuted;
+      videoRef.current.muted = nextMuted;
+      setIsMuted(nextMuted);
+      if (!nextMuted) {
+        videoRef.current.play().catch(() => {});
+      }
+    }
+  };
 
   const getAreaIcon = (iconName: string) => {
     switch (iconName) {
@@ -72,18 +101,25 @@ export const HomePage: React.FC<HomePageProps> = ({
     <div className="space-y-0 text-[#FDFCF8] bg-[#121212]">
       {/* 1. HERO SECTION */}
       <section className="relative pt-16 pb-24 md:pt-24 md:pb-32 overflow-hidden border-b border-[#FDFCF8]/10">
-        {/* Background Portrait of Kim Nicole Thomas with Sophisticated Dark Overlays */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://dmuoodsvt4pkwwlq.public.blob.vercel-storage.com/Create_video_for_leadership_coach_202608312221.mp4" 
-            alt="Kim Nicole Thomas - Executive Leadership and Wellbeing Coach"
-            className="w-full h-full object-cover object-top sm:object-center filter brightness-[0.45] contrast-[1.15] scale-105"
-            referrerPolicy="no-referrer"
-          />
-          {/* Multi-tier gradient overlay to ensure maximum legibility and refined dark aesthetic */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#121212]/95 via-[#121212]/80 to-[#121212] mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-radial-at-center from-transparent via-[#0F0F0F]/65 to-[#0A0A0A]/95"></div>
-          <div className="absolute inset-0 bg-[#0F0F0F]/30 backdrop-blur-[1px]"></div>
+        {/* Video Background with Atmospheric Dark Overlays */}
+        <div className="absolute inset-0 z-0 overflow-hidden bg-[#121212]">
+          <video 
+            ref={videoRef}
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            poster="/src/assets/images/kim_portrait_bg_1788195262640.jpg"
+            className="w-full h-full object-cover object-center filter brightness-[0.78] contrast-[1.05] scale-105 pointer-events-none"
+          >
+            <source 
+              src="https://dmuoodsvt4pkwwlq.public.blob.vercel-storage.com/Create_video_for_leadership_coach_202608312221.mp4" 
+              type="video/mp4" 
+            />
+          </video>
+          {/* Multi-tier gradient overlay to ensure maximum legibility while keeping video prominently visible */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#121212]/70 via-[#121212]/50 to-[#121212]/85"></div>
+          <div className="absolute inset-0 bg-radial-at-center from-transparent via-[#0F0F0F]/30 to-[#0A0A0A]/70"></div>
         </div>
 
         {/* Subtle decorative background ambient glow */}
@@ -101,17 +137,15 @@ export const HomePage: React.FC<HomePageProps> = ({
               Leading at the Top Shouldn't Cost Your <span className="italic font-normal text-[#C5A059]">Wellbeing</span>—or Your <span className="italic font-normal text-[#C5A059]">Edge</span>.
             </h1>
 
+            {/* Subtitle / C-Suite Statement */}
             <p className="text-base sm:text-lg text-[#FDFCF8]/90 max-w-3xl mx-auto leading-relaxed drop-shadow-sm font-normal">
-              Whether you're steering a boardroom, scaling the company you built from the ground up, shaping culture as a thought leader, or bringing bold creative vision to life—you carry the weight of high-stakes decisions, constant visibility, and the pressure to keep performing at your peak.
+              {SITE_CONTACT.cSuiteIntro}
             </p>
 
+            {/* Advisory Offer Box */}
             <div className="p-5 rounded-md bg-[#141414]/90 backdrop-blur-md border border-[#C5A059]/35 text-xs sm:text-sm text-[#FDFCF8]/95 leading-relaxed max-w-3xl mx-auto text-left sm:text-center shadow-2xl">
-              <span className="font-bold text-[#C5A059]">The Partner You Need:</span> Having a dedicated, highly confidential partner who understands organizational systems, strategic execution, and human performance makes the difference between burning out and scaling your impact.
+              <span className="font-bold text-[#C5A059]">Bespoke Partnership:</span> {SITE_CONTACT.cSuiteOffer}
             </div>
-
-            <p className="text-xs sm:text-sm text-[#FDFCF8]/80 max-w-2xl mx-auto leading-relaxed italic">
-              High-touch coaching, strategic sounding-board advisory, and communication support tailored for C-suite executives, emerging leaders, entrepreneurs, and visionary creatives navigating what's next.
-            </p>
 
             {/* Primary & Secondary CTAs */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
@@ -160,29 +194,111 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
           </div>
         </div>
+
+        {/* Video Audio Control Mute/Unmute Toggle Button */}
+        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20">
+          <button
+            onClick={toggleMute}
+            aria-label={isMuted ? "Unmute hero video audio" : "Mute hero video audio"}
+            className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#121212]/80 hover:bg-[#1E1E1E] backdrop-blur-md border border-[#C5A059]/40 hover:border-[#C5A059] text-xs font-semibold text-[#FDFCF8] shadow-2xl transition-all duration-200 active:scale-95"
+          >
+            {isMuted ? (
+              <>
+                <VolumeX className="w-4 h-4 text-[#C5A059] group-hover:scale-110 transition-transform" />
+                <span className="text-[11px] uppercase tracking-wider text-[#FDFCF8]/90 font-medium">Unmute Audio</span>
+              </>
+            ) : (
+              <>
+                <Volume2 className="w-4 h-4 text-[#C5A059] group-hover:scale-110 transition-transform animate-pulse" />
+                <span className="text-[11px] uppercase tracking-wider text-[#C5A059] font-semibold">Audio On</span>
+              </>
+            )}
+          </button>
+        </div>
       </section>
 
-      {/* 2. CORE AREAS OF SUPPORT SECTION (5 PILLARS) */}
-      <section className="py-20 md:py-28 bg-[#0F0F0F] border-b border-[#FDFCF8]/10">
+      {/* 2. EXECUTIVE BIO SECTION */}
+      <section className="py-16 md:py-24 bg-[#0F0F0F] border-b border-[#FDFCF8]/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-4 space-y-4">
+              <div className="relative rounded-xl overflow-hidden border border-[#C5A059]/30 shadow-2xl bg-[#181818] aspect-[4/5] max-w-sm mx-auto">
+                <img 
+                  src="/src/assets/images/kim_portrait_bg_1788195262640.jpg" 
+                  alt="Kim Nicole Thomas"
+                  className="w-full h-full object-cover object-top"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent"></div>
+                <div className="absolute bottom-4 left-4 right-4 text-center">
+                  <h3 className="font-serif text-xl font-bold text-[#FDFCF8]">Kim Nicole Thomas</h3>
+                  <p className="text-xs text-[#C5A059] font-medium">{SITE_CONTACT.location}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-8 space-y-5">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#C5A059]/10 text-[#C5A059] text-xs font-bold uppercase tracking-widest border border-[#C5A059]/25">
+                <Award className="w-3.5 h-3.5 text-[#C5A059]" />
+                Executive Bio
+              </span>
+
+              <h2 className="font-serif text-3xl sm:text-4xl text-[#FDFCF8] font-bold tracking-tight">
+                Trusted Confidante & Strategic Sounding Board to Senior Leaders
+              </h2>
+
+              <p className="text-sm sm:text-base text-[#FDFCF8]/85 leading-relaxed">
+                {SITE_CONTACT.executiveBioParagraph1}
+              </p>
+
+              <p className="text-sm sm:text-base text-[#FDFCF8]/75 leading-relaxed">
+                {SITE_CONTACT.executiveBioParagraph2}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div className="p-3.5 rounded-md bg-[#181818] border border-[#FDFCF8]/10 text-xs text-[#FDFCF8]/80 flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                  <span><strong>Founder</strong> of KimNicole Inc.</span>
+                </div>
+                <div className="p-3.5 rounded-md bg-[#181818] border border-[#FDFCF8]/10 text-xs text-[#FDFCF8]/80 flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                  <span><strong>Director</strong> of Strategy, Partnerships & Innovation at GEM Agency</span>
+                </div>
+                <div className="p-3.5 rounded-md bg-[#181818] border border-[#FDFCF8]/10 text-xs text-[#FDFCF8]/80 flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                  <span><strong>Degrees</strong> from Queen's University</span>
+                </div>
+                <div className="p-3.5 rounded-md bg-[#181818] border border-[#FDFCF8]/10 text-xs text-[#FDFCF8]/80 flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                  <span><strong>Specialized Training:</strong> Leadership Coaching, Conflict Resolution & Trauma-Informed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. CORE AREAS OF SUPPORT SECTION (5 PILLARS FROM PDF) */}
+      <section className="py-20 md:py-28 bg-[#121212] border-b border-[#FDFCF8]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#C5A059]/10 text-[#C5A059] text-xs font-bold uppercase tracking-widest border border-[#C5A059]/25">
               <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-              Executive & High-Performance Support
+              Core Capabilities
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#FDFCF8] font-bold tracking-tight">
               Core Areas of Support
             </h2>
             <p className="text-base sm:text-lg text-[#FDFCF8]/70">
-              High-touch coaching, strategic sounding-board advisory, and communication support tailored for C-suite executives, emerging leaders, entrepreneurs, and visionary creatives navigating what's next.
+              High-touch executive coaching, strategic sounding-board advisory, and executive communication support tailored specifically for C-suite leaders.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {CORE_AREAS_OF_SUPPORT.map((area, idx) => (
+            {CORE_AREAS_OF_SUPPORT.map((area) => (
               <div 
                 key={area.id}
-                className="bg-[#141414] rounded-xl p-8 border border-[#FDFCF8]/10 hover:border-[#C5A059]/60 transition-all duration-300 shadow-xl flex flex-col justify-between group"
+                className="bg-[#181818] rounded-xl p-8 border border-[#FDFCF8]/10 hover:border-[#C5A059]/60 transition-all duration-300 shadow-xl flex flex-col justify-between group"
               >
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-md bg-[#1E1E1E] text-[#C5A059] flex items-center justify-center font-bold group-hover:bg-[#C5A059] group-hover:text-[#121212] transition-colors border border-[#FDFCF8]/10">
@@ -249,6 +365,81 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. EXECUTIVE ENGAGEMENT MODELS (FROM PDF) */}
+      <section className="py-20 md:py-28 bg-[#0F0F0F] border-b border-[#FDFCF8]/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#C5A059]/10 text-[#C5A059] text-xs font-bold uppercase tracking-widest border border-[#C5A059]/25">
+              <Layers className="w-3.5 h-3.5 text-[#C5A059]" />
+              Structured Engagements
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#FDFCF8] font-bold tracking-tight">
+              Executive Engagement Models
+            </h2>
+            <p className="text-base sm:text-lg text-[#FDFCF8]/70">
+              Clear, disciplined structures tailored to C-suite retainers, high-visibility milestones, and strategic thought leadership.
+            </p>
+          </div>
+
+          {/* Engagement Models Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {EXECUTIVE_ENGAGEMENT_MODELS.map((item) => (
+              <div 
+                key={item.id}
+                className="bg-[#181818] rounded-xl p-8 border border-[#FDFCF8]/10 shadow-xl flex flex-col justify-between hover:border-[#C5A059]/50 transition-all group"
+              >
+                <div className="space-y-5">
+                  <div className="flex items-center justify-between">
+                    <span className="px-3 py-1 rounded-sm bg-[#C5A059]/15 text-[#C5A059] text-[11px] font-bold uppercase tracking-wider border border-[#C5A059]/30">
+                      {item.badge}
+                    </span>
+                    <div className="w-10 h-10 rounded-md bg-[#1E1E1E] text-[#C5A059] flex items-center justify-center border border-[#FDFCF8]/10 group-hover:bg-[#C5A059] group-hover:text-[#121212] transition-colors">
+                      {getAreaIcon(item.iconName || 'ShieldCheck')}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="font-serif text-2xl font-bold text-[#FDFCF8] group-hover:text-[#C5A059] transition-colors">
+                      {item.model}
+                    </h3>
+                  </div>
+
+                  {/* Details block */}
+                  <div className="p-4 rounded-md bg-[#141414] border border-[#FDFCF8]/10 space-y-1">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#C5A059] block">
+                      Engagement Details
+                    </span>
+                    <p className="text-xs text-[#FDFCF8]/85 leading-relaxed font-medium">
+                      {item.details}
+                    </p>
+                  </div>
+
+                  {/* Focus Areas block */}
+                  <div className="p-4 rounded-md bg-[#141414] border border-[#FDFCF8]/10 space-y-1">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#C5A059] block">
+                      Focus Areas
+                    </span>
+                    <p className="text-xs text-[#FDFCF8]/75 leading-relaxed">
+                      {item.focusAreas}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-[#FDFCF8]/10">
+                  <button
+                    onClick={onOpenBooking}
+                    className="w-full py-3 rounded-sm bg-[#1E1E1E] text-[#FDFCF8] font-bold text-xs uppercase tracking-wider hover:bg-[#C5A059] hover:text-[#121212] transition-all flex items-center justify-center gap-2 border border-[#FDFCF8]/10"
+                  >
+                    <span>Inquire About {item.model.split(' ')[0]}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -388,7 +579,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             Navigate Your Next Leadership Mandate With Unshakable Poise
           </h2>
           <p className="text-base sm:text-lg text-[#FDFCF8]/70 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Whether you are preparing for a major institutional transformation, seeking 1:1 executive coaching to prevent burnout, or planning a keynote for your annual summit, Kim Nicole Thomas is ready to partner with you.
+            Whether you are navigating high-stakes strategic decisions, seeking 1:1 executive coaching to prevent burnout, or preparing for high-visibility keynote presentations, Kim Nicole Thomas is ready to partner with you.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -411,6 +602,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 
           <div className="mt-8 pt-6 border-t border-[#FDFCF8]/10 flex flex-wrap items-center justify-center gap-6 text-xs text-[#FDFCF8]/60">
             <span className="flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
+              <span>{SITE_CONTACT.location}</span>
+            </span>
+            <span>•</span>
+            <span className="flex items-center gap-1.5">
               <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
               <a href={`tel:${SITE_CONTACT.phone}`} className="hover:text-[#C5A059] font-bold">{SITE_CONTACT.phoneFormatted}</a>
             </span>
@@ -420,7 +616,10 @@ export const HomePage: React.FC<HomePageProps> = ({
               <a href={`mailto:${SITE_CONTACT.email}`} className="hover:text-[#C5A059] font-bold">{SITE_CONTACT.email}</a>
             </span>
             <span>•</span>
-            <span>Caledon, Ontario</span>
+            <span className="flex items-center gap-1.5">
+              <Linkedin className="w-3.5 h-3.5 text-[#C5A059]" />
+              <a href={SITE_CONTACT.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-[#C5A059] font-bold">{SITE_CONTACT.linkedinDisplay}</a>
+            </span>
           </div>
         </div>
       </section>

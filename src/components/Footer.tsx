@@ -226,6 +226,19 @@ export const Footer: React.FC<FooterProps> = ({
                 </div>
               </a>
 
+              <a 
+                href={SITE_CONTACT.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 p-3 rounded-md bg-[#181818] hover:bg-[#202020] border border-[#FDFCF8]/10 hover:border-[#C5A059]/40 transition-all group"
+              >
+                <Globe className="w-4 h-4 text-[#C5A059] mt-0.5 group-hover:scale-110 transition-transform" />
+                <div className="overflow-hidden">
+                  <span className="text-xs text-[#FDFCF8]/50 block uppercase tracking-wider text-[10px]">LinkedIn Profile</span>
+                  <span className="font-bold text-[#FDFCF8] group-hover:text-[#C5A059] truncate block transition-colors">{SITE_CONTACT.linkedinDisplay}</span>
+                </div>
+              </a>
+
               <div className="flex items-start gap-3 p-3 rounded-md bg-[#181818] border border-[#FDFCF8]/10">
                 <MapPin className="w-4 h-4 text-[#C5A059] mt-0.5" />
                 <div>

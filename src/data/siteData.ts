@@ -4,20 +4,26 @@ import {
   AdvisoryOffering,
   CoachingPillar,
   SectorExperience,
-  AssessmentQuestion
+  AssessmentQuestion,
+  ExecutiveEngagementModel
 } from '../types';
 
 export const SITE_CONTACT = {
   name: "Kim Nicole Thomas",
-  role: "Executive Leadership & Wellbeing Coach | Strategic Advisor | Keynote Speaker",
+  role: "EXECUTIVE LEADERSHIP & WELLBEING COACH | STRATEGIC ADVISOR | KEYNOTE SPEAKER",
   experienceYears: "30+",
   phone: "647-618-6311",
   phoneFormatted: "647-618-6311",
   email: "kimnthomas@gmail.com",
   location: "Toronto, Ontario",
-  serviceScope: "Serving C-Suite Leaders, Founders, & Visionary Creatives Globally and Across North America",
+  linkedin: "https://www.linkedin.com/in/kimnicoleinc",
+  linkedinDisplay: "www.linkedin.com/in/kimnicoleinc",
+  serviceScope: "Serving C-Suite Leaders, Senior Executives & Global Platforms",
   tagline: "Leading at the Top Shouldn't Cost Your Wellbeing—or Your Edge.",
-  heroSubheadline: "Whether you're steering a boardroom, scaling the company you built from the ground up, shaping culture as a thought leader, or bringing bold creative vision to life—you carry the weight of high-stakes decisions, constant visibility, and the pressure to keep performing at your peak. Having a dedicated, highly confidential partner who understands organizational systems, strategic execution, and human performance makes the difference between burning out and scaling your impact.",
+  cSuiteIntro: "As a C-suite executive, you navigate relentless ambiguity, high-stakes decision-making, and constant public scrutiny. Having a dedicated, highly confidential partner who understands organizational systems, strategic execution, and human performance makes the difference between burning out and scaling your impact.",
+  cSuiteOffer: "I offer high-touch executive coaching, strategic sounding-board advisory, and executive communication support tailored specifically for C-suite leaders.",
+  executiveBioParagraph1: "Kim Nicole Thomas is an executive advisor, leadership and wellbeing coach, and internationally recognized keynote speaker with over 30 years of experience guiding senior leaders through complex, high-stakes environments across healthcare, technology, education, and institutional sectors. Working at the intersection of strategic decision-making, high-performance execution, and personal sustainability, Kim helps C-suite executives lead with clarity, sound judgment, and unwavering resilience—without burning out.",
+  executiveBioParagraph2: "As the Founder of KimNicole Inc. and Director of Strategy, Partnerships & Innovation at GEM Agency, Kim serves as a trusted confidante and strategic sounding board to C-level executives. Her background includes launching and directing inaugural TEDx initiatives, coaching speakers for major global platforms, and authoring high-level executive briefings and thought leadership pieces for senior leaders. Armed with degrees from Queen’s University and specialized training in leadership coaching, conflict resolution, and trauma-informed practices, Kim delivers bespoke, high-touch support that transforms how executives decide, communicate, and lead.",
   founderRole: "Founder of KimNicole Inc.",
   agencyRole: "Director of Strategy, Partnerships & Innovation at GEM Agency",
   education: "Degrees from Queen’s University",
@@ -25,52 +31,79 @@ export const SITE_CONTACT = {
 };
 
 export const CORE_METRICS = [
-  { value: "30+", label: "Years Guiding Senior Leaders", description: "Cross-sector executive advisory & leadership coaching" },
-  { value: "4", label: "Anchor Sectors", description: "Healthcare, Technology, Education, & Institutional Governance" },
-  { value: "TEDx", label: "Inaugural Director & Coach", description: "Launching TEDx initiatives & coaching global platform speakers" },
-  { value: "100%", label: "Confidential Counsel", description: "Discreet strategic sounding board for C-Suite, Founders & Boards" },
+  { value: "30+", label: "Years Guiding Senior Leaders", description: "Across Healthcare, Tech, Education & Institutional Sectors" },
+  { value: "C-Suite", label: "Dedicated Advisory & Coaching", description: "Discreet confidential counsel for C-Level executives" },
+  { value: "TEDx", label: "Inaugural Director & Speaker Coach", description: "Coaching speakers for major global platforms & keynotes" },
+  { value: "100%", label: "Confidential Partnership", description: "Trusted sounding board for high-stakes decision making" },
 ];
 
 export const CORE_AREAS_OF_SUPPORT = [
   {
     id: "strategic-advisory",
     title: "Strategic Advisory & Decision-Making",
-    tagline: "A Seasoned, Impartial Sounding Board",
-    description: "A seasoned, impartial sounding board to pressure-test ideas, evaluate risk, and navigate complex stakeholder landscapes—whether that's a boardroom, a founding team, or your own next big move.",
+    tagline: "Impartial Sounding Board",
+    description: "Serve as a seasoned, impartial sounding board to pressure-test strategic ideas, evaluate risk, refine organizational direction, and navigate complex stakeholder landscapes.",
     iconName: "ShieldCheck",
-    keyFocus: ["Pressure-testing high-risk decisions", "Navigating complex stakeholder dynamics", "Boardroom & founder team alignment", "Evaluating strategic blind spots"]
+    keyFocus: ["Pressure-test strategic ideas", "Evaluate risk & blind spots", "Refine organizational direction", "Navigate complex stakeholder landscapes"]
   },
   {
     id: "sustainable-wellbeing",
-    title: "Sustainable High Performance & Wellbeing",
-    tagline: "Sustained Vitality Without Depletion",
-    description: "Evidence-based resilience practices that let you sustain focus, presence, and energy at the top, without sacrificing your health or personal life.",
+    title: "Executive Wellbeing & Sustainable Performance",
+    tagline: "Peak Presence Without Burnout",
+    description: "Integrate evidence-based resilience practices so you can sustain peak executive presence, focus, and energy without sacrificing your health or personal life.",
     iconName: "BatteryCharging",
-    keyFocus: ["Cognitive load & nervous system resilience", "Preventing executive burnout & fatigue", "Sustainable energy calibration", "Preserving clarity under chronic pressure"]
+    keyFocus: ["Evidence-based resilience practices", "Sustain peak executive presence", "Preserve focus & cognitive stamina", "Protect health & personal life"]
   },
   {
     id: "presentations-prep",
-    title: "High-Stakes Presentations & Keynote Prep",
-    tagline: "Presence, Delivery, and Audience Impact",
-    description: "Comprehensive preparation for high-visibility moments—board meetings, TED/TEDx talks, investor pitches, keynotes—focused on presence, delivery, and audience impact.",
+    title: "High-Stakes Presentations & Keynote Prepping",
+    tagline: "Delivery, Presence & Impact",
+    description: "Comprehensive preparation for high-visibility engagements (including TED/TEDx talks, board presentations, and international keynotes), focusing on executive presence, delivery, and audience impact.",
     iconName: "Mic2",
-    keyFocus: ["TED / TEDx speaker coaching", "Board meeting & investor pitch delivery", "High-visibility stage presence & gravitas", "Storytelling & executive narrative structure"]
+    keyFocus: ["TED / TEDx talks & global platforms", "Boardroom presentations & investor briefings", "Executive stage presence & delivery polish", "Audience impact & narrative structure"]
   },
   {
     id: "thought-leadership",
-    title: "Ghostwriting & Thought Leadership",
-    tagline: "Elevating Your Voice and Brand",
-    description: "Polished communications, opinion pieces, keynote speeches, and digital/print assets that elevate your personal brand and voice.",
+    title: "Executive Ghostwriting & Thought Leadership",
+    tagline: "Elevating Your Voice & Brand",
+    description: "Craft polished executive communications, opinion pieces, keynote speeches, and digital/print thought leadership assets that elevate your personal brand and organizational voice.",
     iconName: "BookOpen",
-    keyFocus: ["Executive op-eds & thought leadership", "Keynote speechwriting & briefings", "Strategic positioning & brand voice", "Polished digital and print communications"]
+    keyFocus: ["Polished executive communications", "Opinion pieces & op-eds", "Keynote speeches & briefings", "Digital & print thought leadership assets"]
   },
   {
     id: "conflict-mediation",
-    title: "Conflict Mediation & Confidential Sounding Board",
-    tagline: "A Private Space for Complex Dynamics",
-    description: "A private space to process complex dynamics, strategic pivots, and sensitive communication challenges before you take them to your board, team, or the public.",
+    title: "Conflict Mediation & Sounding Board",
+    tagline: "Confidential Space for Dynamics",
+    description: "Confidential space to process complex internal dynamics, strategic pivots, and sensitive communication challenges before taking them to the board or team.",
     iconName: "HeartHandshake",
-    keyFocus: ["Confidential crisis deconstruction", "Executive & board conflict mediation", "Trauma-informed communication practices", "Navigating high-stakes sensitive transitions"]
+    keyFocus: ["Process complex internal dynamics", "Confidential strategic pivots", "Sensitive communication challenges", "Pre-board alignment & mediation"]
+  }
+];
+
+export const EXECUTIVE_ENGAGEMENT_MODELS: ExecutiveEngagementModel[] = [
+  {
+    id: "advisory-retainer",
+    model: "C-Suite Advisory Retainer",
+    details: "1:1 ongoing strategic partnership (bi-weekly or monthly sessions + direct access)",
+    focusAreas: "Decision support, leadership sounding board, wellbeing & resilience strategy",
+    badge: "Ongoing Partnership",
+    iconName: "ShieldCheck"
+  },
+  {
+    id: "presentation-sprint",
+    model: "High-Stakes Presentation Sprint",
+    details: "Intensive 4-to-6 week coaching engagement",
+    focusAreas: "Keynote/TED-style prep, message framing, delivery polish, slide storyboarding",
+    badge: "Intensive Sprint",
+    iconName: "Mic2"
+  },
+  {
+    id: "thought-leadership-package",
+    model: "Executive Thought Leadership Package",
+    details: "Project-based ghostwriting & content strategy",
+    focusAreas: "Speeches, published articles, executive briefings, digital/print leadership content",
+    badge: "Project-Based",
+    iconName: "BookOpen"
   }
 ];
 
